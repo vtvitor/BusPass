@@ -34,9 +34,9 @@ Desenvolver uma aplicação web interativa que:
 | Integrante | Funções / Responsabilidades |
 |---|---|
 | **[Vitor Derencio](https://github.com/vtvitor)** | Full-Stack Developer |
-| **[Leticia Meira](https://github.com/leticiamei)** | Full-Stack Developer |
-| **Maria Feitosa** | Front-End Developer |
-| **Kauan Fernandes** | UI/UX Designer |
+| **[Leticia S. Meira](https://github.com/leticiameira-star)** | Full-Stack Developer |
+| **[Maria C. Feitosa](https://github.com/konomi-naruko)** | Front-End Developer |
+| **[Kauan Fernandes S.](https://github.com/kauan-cmd-alt)** | UI/UX Designer |
 
 O projeto foi desenvolvido de forma colaborativa, reunindo conhecimentos em desenvolvimento web, integração de sistemas, banco de dados e design de interfaces.
 
