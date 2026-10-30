@@ -13,8 +13,9 @@
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 // ===== WIFI =====
-const char* ssid = "WIFI_IOT_CFP601";
-const char* password = "iot@senai601";
+#include "secrets.h"  // Defina WIFI_SSID e WIFI_PASSWORD localmente
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
 
 // ===== SERVIDOR JAVA (RENDER) =====
 // Troque pelo endereco do seu servico no Render (sempre https, sem porta)
