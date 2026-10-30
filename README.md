@@ -1,4 +1,50 @@
-# 🚌 BusPass — Sistema de Mobilidade Urbana e Gestão de Transporte Público
+<div align="center">
+
+# 🚌 BusPass
+### Mobilidade urbana conectada — da plataforma web ao protótipo RFID
+
+**Projeto da equipe Four Sync**
+
+[🌐 Landing page](https://landing-page-wt6o.onrender.com) · [💻 Plataforma web](https://frontend-projeto-kmjv.onrender.com) · [🔧 Código-fonte](https://github.com/vtvitor/BusPass)
+
+![Java](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white) ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.6-6DB33F?logo=springboot&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white) ![ESP32](https://img.shields.io/badge/ESP32-IoT-35495e) ![Arduino](https://img.shields.io/badge/Arduino-Mega-00979D?logo=arduino&logoColor=white)
+
+</div>
+
+> **Estado:** projeto acadêmico e protótipo em desenvolvimento. Recargas do sistema não representam pagamentos bancários reais; a integração completa com a catraca física não está homologada.
+
+## ✨ Conheça o BusPass
+
+A plataforma reúne **cadastro, cartão, saldo, recargas simuladas, consulta de linhas e mapa de pontos de ônibus**. Além do software, o projeto desenvolve um terminal com **ESP32 + RFID RC522 + Arduino Mega + display TFT**.
+
+| Aplicação web | Protótipo físico |
+| --- | --- |
+| Interface responsiva, JavaScript e API REST | Identificação RFID e comunicação entre microcontroladores |
+| Back-end Java/Spring Boot + MySQL | Display TFT, mecanismo de catraca e peças modeladas em 3D |
+| Consulte as funções no link da plataforma | Integração ponta a ponta em fase de testes |
+
+### 🧭 Navegação rápida
+
+[Funcionalidades](#️-recursos-e-funcionalidades) · [Arquitetura](docs/ARQUITETURA.md) · [Hardware e montagem](docs/HARDWARE.md) · [Segurança](docs/SEGURANCA.md) · [Executar](#-como-utilizar) · [Equipe](#-equipe--four-sync)
+
+### 🗂️ Estrutura real do repositório
+
+```text
+BusPass/
+├── Back-end/            # API Java + Spring Boot
+├── Front-end/           # Interface web HTML, CSS e JavaScript
+├── Banco-De-Dados/      # Script SQL
+├── Codigo-IoT/
+│   ├── ESP32/           # Leitor RFID e requisições à API
+│   └── Arduino_TFT/     # TFT e controle do motor
+├── Landing-page/        # Site de apresentação
+├── Modelagem-fisica/    # Modelos STL
+└── docs/                # Diagramas, hardware e segurança
+```
+
+---
+
+## 📖 Sobre o projeto
 
 Projeto desenvolvido pela equipe **Four Sync**, com o objetivo de modernizar e facilitar a utilização do transporte público por meio de uma plataforma web intuitiva e acessível.
 
