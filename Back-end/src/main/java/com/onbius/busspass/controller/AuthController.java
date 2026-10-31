@@ -1,47 +1,26 @@
 package com.onbius.busspass.controller;
-
 import com.onbius.busspass.entity.Usuario;
+import com.onbius.busspass.service.AuthTokens;
 import com.onbius.busspass.service.UsuarioService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.Map;
-
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
-
-    private final UsuarioService service;
-
-    public AuthController(UsuarioService service) {
-        this.service = service;
-    }
-
-    @PostMapping("/register")
-    public Map<String, Object> register(@RequestBody Usuario dados) {
-        Usuario salvo = service.cadastrar(dados);
-
-        Map<String, Object> resp = new HashMap<>();
-        resp.put("id", salvo.getId());
-        resp.put("nome", salvo.getNome());
-        resp.put("email", salvo.getEmail());
-        resp.put("cpf", salvo.getCpf());
-        return resp;
-    }
-
-    @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, String> dados) {
-        Usuario u = service.login(dados.get("email"), dados.get("senha"));
-        if (u == null) {
-            throw new RuntimeException("E-mail ou senha inválidos.");
-        }
-
-        Map<String, Object> resp = new HashMap<>();
-        resp.put("id", u.getId());
-        resp.put("nome", u.getNome());
-        resp.put("email", u.getEmail());
-        resp.put("cpf", u.getCpf());
-        return resp;
-    }
+  private final UsuarioService users; private final AuthTokens tokens;
+  public AuthController(UsuarioService users,AuthTokens tokens){this.users=users;this.tokens=tokens;}
+  @PostMapping("/register")
+  public Map<String,Object> register(@RequestBody Usuario data){return result(users.cadastrar(data));}
+  @PostMapping("/login")
+  public Map<String,Object> login(@RequestBody Map<String,String> data){
+    Usuario user=users.login(data.get("email"),data.get("senha"));
+    if(user==null)throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"E-mail ou senha inválidos.");
+    return result(user);
+  }
+  private Map<String,Object> result(Usuario u){
+    return Map.of("id",u.getId(),"nome",u.getNome(),"email",u.getEmail(),"cpf",u.getCpf(),
+      "token",tokens.issue(u.getId()),"expiresInSeconds",tokens.ttl());
+  }
 }
