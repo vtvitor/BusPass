@@ -3,6 +3,7 @@
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 #include <HTTPClient.h>
+#include "secrets.h" // crie este arquivo localmente a partir de secrets.example.h
 
 // ===== RC522 =====
 #define SS_PIN    5    // SDA
@@ -13,8 +14,7 @@
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 // ===== WIFI =====
-const char* ssid = "WIFI_IOT_CFP601";
-const char* password = "iot@senai601";
+
 
 // ===== SERVIDOR JAVA (RENDER) =====
 // Troque pelo endereco do seu servico no Render (sempre https, sem porta)
@@ -92,7 +92,7 @@ void loop() {
 
   // HTTPS (Render): aceita o certificado sem validar
   WiFiClientSecure client;
-  client.setInsecure();
+  client.setCACert(ROOT_CA); // certificado da autoridade raiz confiável
 
   HTTPClient http;
   http.setTimeout(30000);              // Render gratis pode demorar ate ~60 s para acordar
@@ -104,6 +104,7 @@ void loop() {
   }
 
   http.addHeader("Content-Type", "application/json");
+  http.addHeader("X-Device-Token", DEVICE_TOKEN);
   String json = "{\"numero\":\"" + uid + "\",\"valorCentavos\":" + String(valorCentavos) + "}";
 
   Serial.println("Enviando para servidor: " + json);

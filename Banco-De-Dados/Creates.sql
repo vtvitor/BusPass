@@ -104,8 +104,9 @@ CREATE TABLE horario (
 CREATE TABLE cartao (
     id            INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id    INT NOT NULL,
-    numero        VARCHAR(30) NOT NULL,
+    numero        VARCHAR(30) NOT NULL UNIQUE,
     saldo_centavos INT DEFAULT 0,
+    bloqueado     BOOLEAN NOT NULL DEFAULT FALSE,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id)
 );
 
@@ -118,6 +119,19 @@ CREATE TABLE recarga (
     valor_centavos INT NOT NULL,
     data_recarga   DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (cartao_id) REFERENCES cartao(id)
+);
+
+-- ============================================
+-- Movimentações de créditos demonstrativos e passagem
+-- ============================================
+CREATE TABLE IF NOT EXISTS movimentacao (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    cartao_id BIGINT NOT NULL,
+    tipo VARCHAR(20) NOT NULL,
+    valor_centavos INT NOT NULL,
+    saldo_apos_centavos INT NOT NULL,
+    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_movimentacao_cartao_data (cartao_id, data_hora)
 );
 
 -- ============================================

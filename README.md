@@ -34,10 +34,10 @@ O projeto combina **front-end, back-end e banco de dados**, com um protótipo f�
 
 | Funcionalidade | Descrição |
 | --- | --- |
-| **Cadastro e login** | Criação de contas e autenticação básica pela API. |
-| **Gerenciamento de cartões** | Cadastro, listagem e exclusão de cartões vinculados a um usuário. |
+| **Cadastro e login** | Cadastro de contas, hash BCrypt e autenticação por token assinado. |
+| **Gerenciamento de cartões** | Cadastro, listagem, bloqueio persistente, histórico e exclusão com controle de proprietário. |
 | **Consulta de saldo** | Exibição do saldo em créditos, armazenado em centavos no banco. |
-| **Recargas** | Adição de créditos demonstrativos, sem integração com Pix ou pagamento bancário. |
+| **Recargas** | Adição de créditos demonstrativos com histórico, sem integração com Pix ou pagamento bancário. |
 | **Linhas e pontos de ônibus** | Consulta de informações disponibilizadas pelos dados e endpoints do projeto. |
 | **Mapa interativo e trajetos** | Visualização de pontos e exploração de trajetos com recursos de mapa. |
 | **Interface web** | Navegação entre os recursos do BusPass em HTML, CSS e JavaScript. |
@@ -73,6 +73,8 @@ Além do repositório integrado do BusPass, os módulos digitais também podem s
 
 > O **BusPass** é o repositório integrado; os links de front-end, back-end e landing page acima apontam para repositórios separados. Eles podem evoluir independentemente, portanto confira a versão do código de cada um.
 
+**Configuração de segurança e migração:** [SECURITY.md](SECURITY.md).
+
 ## 📦 Estrutura do projeto
 
 ```text
@@ -99,14 +101,16 @@ O **front-end e o back-end** formam o núcleo digital do projeto. As pastas de e
    cd BusPass
    ```
 2. Configure o MySQL e consulte `Banco-De-Dados/Creates.sql`. Verifique a compatibilidade do esquema SQL com as entidades JPA antes de importar dados.
-3. Configure as variáveis de ambiente de conexão com o banco utilizadas por `Back-end/src/main/resources/application.properties`. Não publique credenciais reais.
+3. Configure as variáveis do MySQL e `BUSPASS_AUTH_SECRET` conforme [SECURITY.md](SECURITY.md). Não publique credenciais reais.
 4. Na pasta `Back-end`, inicie a API:
    ```bash
    cd Back-end
    mvn spring-boot:run
    ```
-5. Ajuste a URL da API em `Front-end/api.js` e abra a pasta `Front-end/` em um servidor HTTP local, como o Live Server do VS Code.
-6. Teste o cadastro, login, gerenciamento de cartões e consultas ao mapa usando **dados fictícios**.
+5. Ajuste a URL da API via `window.BUSPASS_API_URL` (antes de carregar `api.js`) ou altere o padrão em `Front-end/api.js`, e abra `Front-end/` em um servidor HTTP local, como Live Server.
+6. Execute `mvn test` na pasta `Back-end/` e teste o cadastro, login, bloqueio, histórico e consultas ao mapa usando **dados fictícios**.
+
+> **Implantação:** se o Render ainda utiliza os repositórios separados, a publicação neste BusPass **não atualiza o site automaticamente**. Veja [SECURITY.md](SECURITY.md) para configurar backend, front-end e firmware da mesma versão.
 
 ### Endpoints principais
 
@@ -117,7 +121,9 @@ O **front-end e o back-end** formam o núcleo digital do projeto. As pastas de e
 | `GET` | `/api/cartoes?usuarioId=...` | Listar cartões |
 | `POST` | `/api/cartoes` | Cadastrar cartão |
 | `POST` | `/api/cartoes/{id}/recarga` | Adicionar créditos demonstrativos |
-| `POST` | `/api/cartoes/pagar` | Debitar saldo por número do cartão |
+| `POST` | `/api/cartoes/pagar` | Debitar tarifa fixa; exige `X-Device-Token` do ESP32 |
+| `PATCH` | `/api/cartoes/{id}/bloquear` | Bloquear cartão (senha do usuário) |
+| `GET` | `/api/cartoes/{id}/historico` | Consultar histórico próprio |
 | `GET` | `/api/linhas` | Consultar linhas |
 | `GET` | `/api/pontos` | Consultar pontos |
 
@@ -139,11 +145,10 @@ O protótipo físico **não é necessário para utilizar a aplicação web**. Os
 
 O projeto tem finalidade educacional e **não deve ser utilizado com dados pessoais ou cobranças reais sem revisão de segurança**. As principais prioridades são:
 
-- Aplicar hash seguro nas senhas e autenticação/autorização efetivas nos endpoints.
-- Restringir consultas, recargas e exclusões aos usuários e dispositivos autorizados.
-- Remover e trocar credenciais eventualmente publicadas e validar certificados HTTPS na comunicação com o ESP32.
-- Tratar débitos e recargas com transações seguras, validações e testes automatizados.
-- Diferenciar claramente dados de demonstração de dados atualizados de transporte público.
+- **Implementado:** hash BCrypt, token de acesso, controle de proprietário, bloqueio no banco, histórico e transações de saldo.
+- **A configurar:** segredos de autenticação, token do ESP32 e certificado TLS do leitor.
+- **A validar:** testes reais de integração, esquema MySQL existente, segurança das credenciais e operação da catraca.
+- **A evoluir:** testes ponta a ponta, rate limiting, migrações SQL versionadas e dados oficiais de transporte.
 
 ### Próximas evoluções
 
