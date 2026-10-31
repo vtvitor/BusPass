@@ -1,70 +1,48 @@
 const API = (() => {
-  const BASE = "https://backend-projeto-tkvz.onrender.com/api";
-
-  async function chamar(path, opcoes = {}) {
+  const BASE = window.BUSPASS_API_URL || "https://backend-projeto-tkvz.onrender.com/api";
+  async function call(path, options = {}) {
+    const session = (() => {
+      try { return JSON.parse(sessionStorage.getItem("buspass.session.v1") || "null"); }
+      catch { return null; }
+    })();
+    let response;
     try {
-      const res = await fetch(BASE + path, {
-        ...opcoes,
+      response = await fetch(BASE + path, {
+        ...options,
         headers: {
           "Content-Type": "application/json",
-          ...(opcoes.headers || {})
+          ...(session?.token ? { Authorization: "Bearer " + session.token } : {}),
+          ...(options.headers || {})
         }
       });
-      if (!res.ok) {
-        const txt = await res.text();
-        throw new Error(txt || "Erro " + res.status);
+    } catch {
+      throw new Error("Sem conexão com a API. Confira sua internet e tente novamente.");
+    }
+    const text = await response.text();
+    let body;
+    try { body = text ? JSON.parse(text) : null; } catch { body = null; }
+    if (!response.ok) {
+      if (response.status === 401 && !path.startsWith("/auth/")) {
+        sessionStorage.removeItem("buspass.session.v1");
       }
-      if (res.status === 204) return null;
-      return await res.json();
-    } catch (e) {
-      console.warn("Backend offline:", e.message);
-      return { offline: true };
+      throw new Error(body?.message || body?.detail || "Erro " + response.status);
     }
+    return body;
   }
-
   return {
-    async register(dados) {
-      return await chamar("/auth/register", {
-        method: "POST",
-        body: JSON.stringify(dados)
-      });
-    },
-
-    async login(dados) {
-      return await chamar("/auth/login", {
-        method: "POST",
-        body: JSON.stringify(dados)
-      });
-    },
-
-    async listarCartoes(usuarioId) {
-      return await chamar("/cartoes?usuarioId=" + usuarioId);
-    },
-
-    async criarCartao(dados) {
-      return await chamar("/cartoes", {
-        method: "POST",
-        body: JSON.stringify(dados)
-      });
-    },
-
-    async recarregarCartao(id, valorCentavos) {
-      return await chamar("/cartoes/" + id + "/recarga", {
-        method: "POST",
-        body: JSON.stringify({ valorCentavos })
-      });
-    },
-
-    async deletarCartao(id) {
-      return await chamar("/cartoes/" + id, { method: "DELETE" });
-    },
-
-    async listarLinhas() {
-      return await chamar("/linhas");
-    },
-
-    async listarPontos() {
-      return await chamar("/pontos");
-    }
+    register: data => call("/auth/register", {method:"POST",body:JSON.stringify(data)}),
+    login: data => call("/auth/login", {method:"POST",body:JSON.stringify(data)}),
+    listarCartoes: id => call("/cartoes?usuarioId=" + encodeURIComponent(id)),
+    criarCartao: data => call("/cartoes", {method:"POST",body:JSON.stringify(data)}),
+    recarregarCartao: (id,valorCentavos) => call("/cartoes/"+encodeURIComponent(id)+"/recarga",{
+      method:"POST",body:JSON.stringify({valorCentavos})
+    }),
+    bloquearCartao: (id,senha) => call("/cartoes/"+encodeURIComponent(id)+"/bloquear",{
+      method:"PATCH",body:JSON.stringify({senha})
+    }),
+    historicoCartao: id => call("/cartoes/"+encodeURIComponent(id)+"/historico"),
+    deletarCartao: id => call("/cartoes/"+encodeURIComponent(id),{method:"DELETE"}),
+    listarLinhas: () => call("/linhas"),
+    listarPontos: () => call("/pontos")
   };
 })();

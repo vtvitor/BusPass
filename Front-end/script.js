@@ -2438,7 +2438,7 @@
 
           if (blockBtn) {
 
-            const blocked = self.bloquear(
+            const blocked = await self.bloquear(
               blockBtn.dataset.blockId
             );
 
@@ -2702,10 +2702,10 @@
           return;
         }
 
-        if (Number(card.balance) <= 0) {
+        if (Number(card.balance) < 0) {
 
           errorEl.textContent =
-            "Saldo deve ser maior que zero.";
+            "Saldo inicial não pode ser negativo.";
 
           return;
         }
@@ -2716,13 +2716,16 @@
         btn.disabled = true;
         btn.textContent = "Cadastrando...";
 
-        await CardManager.criar(card);
-
-        btn.disabled = false;
-        btn.textContent = "Cadastrar cartão";
-
-        form.reset();
-        CardManager.render(listEl);
+        try {
+          await CardManager.criar(card);
+          form.reset();
+          CardManager.render(listEl);
+        } catch (error) {
+          errorEl.textContent = error.message || "Não foi possível cadastrar o cartão.";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Cadastrar cartão";
+        }
       }
     );
 
@@ -3375,7 +3378,7 @@
     }
   }
 
-  window.BusPassInternals = { state, MapManager, RoutePlanner, RouteGeometry, FilterManager, getPointById, pointLabel, escapeHtml };
+  window.BusPassInternals = { state, MapManager, RoutePlanner, RouteGeometry, FilterManager, CardManager, Auth, PollingManager, getPointById, pointLabel, escapeHtml };
 
   document.addEventListener(
     "DOMContentLoaded",

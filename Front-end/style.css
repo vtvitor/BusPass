@@ -678,3 +678,10 @@ header h1 { font-size: 1.3rem; font-weight: 600; }
   #map { min-height:225px; }
 }
 @media (prefers-reduced-motion:reduce) { .support-image { transition:none; } }
+
+/* Histórico seguro de cartões */
+.card-history { margin-top: 10px; padding: 12px; border: 1px solid #cbdcf2; border-radius: 10px; background: #f4f9ff; font-size: .78rem; line-height: 1.55; color: #17395a; }
+.card-history strong { display:block; margin-bottom:7px; }
+.card-history p { padding:5px 0; border-top:1px solid #e3ecf6; }
+.card-action-buttons { display:flex; flex-wrap:wrap; gap:6px; }
+@media(max-width:460px) { .card-action-buttons .btn { min-height:36px; } .card-history { padding:9px; } }
