@@ -1,217 +1,158 @@
-# 🚌 BusPass — Sistema de Mobilidade Urbana e Gestão de Transporte Público
+# 🚌 BusPass — Mobilidade urbana e validação inteligente de transporte
 
-Projeto desenvolvido pela equipe **Four Sync**, com o objetivo de modernizar e facilitar a utilização do transporte público por meio de uma plataforma web intuitiva e acessível.
+<p align="center">
+  <strong>Uma plataforma de transporte público que conecta aplicação web, API Java e prototipagem IoT.</strong>
+</p>
 
-O **BusPass** é uma solução tecnológica voltada à mobilidade urbana, integrando gerenciamento de cartões de transporte, consulta de saldo, recargas, informações sobre linhas de ônibus e visualização de pontos e trajetos em um mapa interativo.
+<p align="center">
+  <img src="assets/buspass-prototipo.svg" alt="Ilustração conceitual do terminal BusPass com tela, RFID, cartão, ESP32 e Arduino" width="100%" />
+</p>
 
----
+<p align="center"><sub>Ilustração conceitual do protótipo. A montagem física e a integração ponta a ponta ainda precisam de validação.</sub></p>
 
-## 📚 Contexto e Problema
+<p align="center">
+  <a href="https://landing-page-wt6o.onrender.com">Conhecer o projeto</a> ·
+  <a href="https://github.com/vtvitor/BusPass/tree/main/Front-end">Front-end</a> ·
+  <a href="https://github.com/vtvitor/BusPass/tree/main/Back-end">Back-end</a> ·
+  <a href="https://github.com/vtvitor/BusPass/tree/main/Codigo-IoT">Firmware IoT</a>
+</p>
 
-O transporte público é essencial para a mobilidade urbana, porém muitos passageiros enfrentam dificuldades para consultar saldos, realizar recargas, localizar pontos de ônibus e acessar informações sobre linhas e horários.
+> **Status:** projeto em desenvolvimento, de caráter demonstrativo/educacional. Existem componentes de software e firmware implementados, mas o conjunto físico integrado não está documentado como homologado. As recargas do sistema registram créditos, **não processam pagamentos bancários reais**.
 
-A falta de centralização dessas informações pode gerar atrasos, deslocamentos desnecessários e dificuldades no planejamento das viagens.
+## Sobre o projeto
 
-O **BusPass** surge como uma proposta de solução digital capaz de reunir diferentes funcionalidades relacionadas ao transporte coletivo em uma única plataforma, proporcionando maior praticidade, organização e autonomia aos passageiros.
+Desenvolvido pela equipe **Four Sync**, o BusPass reúne em um mesmo repositório uma aplicação web para o passageiro, uma API REST em Java/Spring Boot, scripts de banco de dados, firmware de eletrônica embarcada e arquivos de modelagem 3D.
 
----
+O objetivo é simplificar o acompanhamento de cartões e saldos, a consulta a linhas e pontos de ônibus e a interação com um protótipo de terminal de validação por RFID.
 
-## 🎯 Objetivos do Projeto
+### Principais recursos
 
-Desenvolver uma aplicação web interativa que:
+| Área | O que existe no código |
+| --- | --- |
+| **Acesso** | Cadastro de usuários e endpoint de login |
+| **Cartões** | Cadastro, listagem por usuário, exclusão e consulta de saldo |
+| **Recargas** | Adição de créditos ao saldo registrado no banco, sem gateway de pagamento |
+| **Passagens** | Endpoint de débito por número de cartão, com verificação de saldo |
+| **Mobilidade** | Endpoints para consulta de linhas e pontos e interface web com recursos de mapa |
+| **IoT** | Firmware do ESP32 para leitura RC522 e requisição HTTP; firmware do Arduino Mega para display TFT e motor |
 
-- **Facilite o gerenciamento de cartões:** Permita aos usuários cadastrar e acompanhar seus cartões de transporte.
-- **Simplifique as recargas:** Ofereça uma interface prática para adicionar e gerenciar créditos.
-- **Centralize informações:** Disponibilize consultas de linhas, horários e pontos de ônibus.
-- **Auxilie no planejamento de trajetos:** Utilize mapas interativos para facilitar a visualização de locais e deslocamentos.
-- **Melhore a experiência do usuário:** Proporcione uma navegação moderna, intuitiva e responsiva.
-- **Promova a mobilidade inteligente:** Utilize recursos tecnológicos para tornar o transporte público mais acessível e organizado.
+**Importante:** a existência dessas rotinas no código não significa que o sistema completo esteja testado em ambiente de produção.
 
----
-
-## 👥 Equipe — FOUR SYNC
-
-| Integrante | Funções / Responsabilidades |
-|---|---|
-| **[Vitor Derencio](https://github.com/vtvitor)** | Full-Stack Developer |
-| **[Leticia S. Meira](https://github.com/leticiameira-star)** | Full-Stack Developer |
-| **[Maria C. Feitosa](https://github.com/konomi-naruko)** | Front-End Developer |
-| **[Kauan Fernandes S.](https://github.com/kauan-cmd-alt)** | UI/UX Designer |
-
-O projeto foi desenvolvido de forma colaborativa, reunindo conhecimentos em desenvolvimento web, integração de sistemas, banco de dados e design de interfaces.
-
----
-
-## 🛠️ Implementação Técnica
-
-### Tecnologias utilizadas
+## Tecnologias
 
 | Camada | Tecnologias |
-|---|---|
-| **Front-End** | HTML5, CSS3 e JavaScript |
-| **Back-End** | Java 21 e Spring Boot 3.5.6 |
-| **API** | REST, utilizando requisições HTTP e JSON |
-| **Banco de Dados** | MySQL |
-| **Persistência** | Spring Data JPA / Hibernate |
-| **Gerenciamento de dependências** | Maven |
-| **Infraestrutura** | Docker e Render |
+| --- | --- |
+| Interface web | HTML5, CSS3, JavaScript |
+| API | Java 21, Spring Boot 3.5.6, REST/JSON |
+| Persistência | MySQL, Spring Data JPA / Hibernate |
+| Build e implantação | Maven, Dockerfile e configuração para hospedagem |
+| Eletrônica | ESP32, Arduino Mega, RFID-RC522 e display TFT |
+| Prototipagem | Modelos STL e impressão 3D |
 
-A aplicação utiliza uma arquitetura em camadas, separando a interface do usuário, as regras de negócio e a persistência de dados.
+## Protótipo físico
 
-### ⚙️ Recursos e Funcionalidades
-
-- **Cadastro e autenticação:** Criação de contas e acesso por meio de login.
-- **Gerenciamento de cartões:** Cadastro, consulta e gerenciamento de cartões vinculados ao usuário.
-- **Consulta de saldo:** Visualização dos créditos disponíveis no cartão.
-- **Recarga de transporte:** Funcionalidade para adicionar créditos e atualizar o saldo.
-- **Linhas de ônibus:** Consulta das linhas cadastradas no sistema.
-- **Localização de pontos:** Visualização de pontos de ônibus e informações geográficas.
-- **Mapa interativo:** Apoio à navegação e ao planejamento de deslocamentos.
-- **Interface responsiva:** Adaptação da apresentação para diferentes tamanhos de tela.
-- **Integração front-end e back-end:** Comunicação entre a interface web e os serviços REST.
-
-> **Nota:** A recarga atualiza o saldo registrado pelo sistema. A integração com pagamentos bancários reais ainda não está incluída nessa descrição como recurso implementado.
-
----
-
-## 🔌 Protótipo Físico — Eletrônica, RFID e Impressão 3D
-
-Além da plataforma web, o BusPass contempla o **desenvolvimento de um protótipo físico de validação de cartões de transporte**, aproximando o sistema de uma catraca ou terminal eletrônico de ônibus.
-
-### 🧩 Componentes e suas funções
-
-| Componente | Papel no protótipo |
-|---|---|
-| **ESP32** | Microcontrolador previsto para coordenar a leitura de cartão e a comunicação com a aplicação. |
-| **Arduino** | Plataforma utilizada no contexto de desenvolvimento e experimentação de eletrônica embarcada do projeto. |
-| **RFID-RC522** | Leitor de identificação por radiofrequência, destinado a reconhecer um cartão aproximado ao terminal. |
-| **Display TFT/LCD** | Interface visual do terminal, planejada para apresentar informações como leitura, validação e saldo. |
-| **Case impressa em 3D** | Estrutura projetada para acomodar e proteger os componentes eletrônicos. |
-
-### 💳 Leitura e validação do cartão
-
-A proposta de funcionamento do terminal físico é:
-
-1. O passageiro aproxima seu cartão RFID do leitor **RC522**.
-2. O microcontrolador identifica o cartão e transmite sua identificação ao sistema, após a implementação da comunicação.
-3. O back-end consulta o cartão cadastrado e verifica o saldo disponível.
-4. Havendo saldo suficiente, o sistema poderá realizar o **débito da passagem**.
-5. O display poderá apresentar o resultado da operação ao passageiro.
-
-**Base de software existente:** o `CartaoService.java` do back-end já possui um método `debitar` que localiza um cartão pelo número, verifica saldo insuficiente, desconta o valor e salva o novo saldo. Isso **não comprova**, por si só, que a comunicação com o ESP32, o RC522 ou o display já esteja operacional.
-
-### 🖨️ Projeto da case 3D
-
-Nas etapas de modelagem foram desenvolvidas e adaptadas peças em formato **STL** para reunir o leitor RFID-RC522, o ESP32 e o conjunto de display/case:
-
-- Compartimento para o **RFID-RC522**, com área de aproximação do cartão;
-- Espaço interno para acomodar e fixar o **ESP32** de modo discreto;
-- Adaptação da estrutura para receber a tela **TFT/LCD**;
-- Previsão de passagem de cabos e acesso à conexão USB;
-- **Frente plana e lisa, sem relevos**, conforme a definição visual do protótipo;
-- Revisões no posicionamento de furos e pontos de fixação.
-
-As peças foram trabalhadas digitalmente, mas **o encaixe físico, a impressão final e o funcionamento eletrônico integrado não foram confirmados** nas informações disponíveis.
-
-### 🔄 Conexão entre o protótipo e a aplicação
+A proposta é aproximar um cartão do **RFID-RC522**, identificar o cartão pelo **ESP32** e consultar a API para verificar a possibilidade de débito de passagem. O firmware do ESP32 já contém uma chamada ao endpoint `POST /api/cartoes/pagar`. O código do Arduino Mega inclui mensagens no **display TFT** e acionamento do **motor de passos** da catraca.
 
 ```text
-Cartão RFID
-    ↓
-Leitor RC522
-    ↓
-ESP32 / Eletrônica embarcada
-    ↓  (integração de comunicação prevista)
-API REST — Java / Spring Boot
-    ↓
-Banco de Dados — MySQL
-    ↓
-Verificação e débito de saldo
-    ↓
-Resposta para o terminal / Display TFT-LCD
+Cartão RFID → RC522 → ESP32 → API REST (Spring Boot) → MySQL
+                         |
+                         └── comunicação serial → Arduino Mega
+                                                    ├── display TFT
+                                                    └── motor da catraca
 ```
 
-Essa arquitetura representa **o fluxo planejado para a integração completa**, não uma demonstração de funcionamento ponta a ponta já validado.
+O fluxo acima descreve a integração **proposta/implementada em partes**. O teste de funcionamento conjunto, a montagem elétrica definitiva e o comportamento mecânico da catraca devem ser confirmados em bancada.
 
----
+Os arquivos em [`Modelagem-fisica/`](Modelagem-fisica/) incluem modelos STL de componentes mecânicos. A ilustração desta página é uma **visualização do conceito**, não uma fotografia do produto final nem um substituto para medidas de fabricação.
 
-## 📦 Estrutura do Projeto
+## Organização do repositório
 
-O desenvolvimento está dividido em dois repositórios principais.
-
-**Front-End:**
+Este é um **repositório único**, com os módulos organizados em pastas:
 
 ```text
-frontend-projeto/
-├── index.html
-├── style.css
-├── script.js
-├── api.js
-├── data.js
-├── geocode_points.js
-└── Mapa_legendas.png
+BusPass/
+├── Back-end/                 # API Spring Boot, entidades e serviços
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── src/main/
+├── Front-end/                # Aplicação web HTML/CSS/JavaScript
+│   ├── index.html
+│   ├── style.css
+│   ├── script.js
+│   └── api.js
+├── Banco-De-Dados/
+│   └── Creates.sql
+├── Codigo-IoT/
+│   ├── ESP32/esp32.ino
+│   └── Arduino_TFT/Arduino_TFT.ino
+├── Modelagem-fisica/         # Peças e modelos STL
+├── Landing-page/             # Apresentação do projeto
+├── assets/
+│   └── buspass-prototipo.svg
+└── README.md
 ```
 
-**Back-End:**
+## Como executar localmente
 
-```text
-backend-projeto/
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/onbius/busspass/
-│       │       ├── config/
-│       │       ├── controller/
-│       │       ├── entity/
-│       │       ├── repository/
-│       │       ├── service/
-│       │       └── BusspassApplication.java
-│       └── resources/
-│           └── application.properties
-├── pom.xml
-└── Dockerfile
-```
+**Pré-requisitos:** JDK 21, Maven, MySQL e navegador moderno. Para o hardware, são necessários os componentes e bibliotecas específicas dos sketches.
 
-A estrutura favorece a manutenção do código e a organização das responsabilidades entre as diferentes camadas do sistema.
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/vtvitor/BusPass.git
+   cd BusPass
+   ```
+
+2. Prepare um banco MySQL e consulte os scripts em `Banco-De-Dados/Creates.sql`. Confira se o esquema corresponde às entidades atuais antes de importar dados.
+
+3. Configure a conexão do MySQL em `Back-end/src/main/resources/application.properties` usando **variáveis de ambiente** para dados sensíveis, sem publicar senhas ou credenciais reais.
+
+4. Inicie a API (na pasta `Back-end`):
+
+   ```bash
+   cd Back-end
+   mvn spring-boot:run
+   ```
+
+5. Configure a URL da API em `Front-end/api.js` e sirva a pasta `Front-end` em um servidor HTTP local (por exemplo, a extensão Live Server do VS Code).
+
+6. Para a eletrônica, configure a rede e os pinos para seu hardware, instale as bibliotecas Arduino necessárias e grave os sketches em `Codigo-IoT/`. Faça o teste elétrico antes de ligar o motor ou a comunicação serial entre placas.
+
+### Principais endpoints disponíveis
+
+| Método | Rota | Finalidade |
+| --- | --- | --- |
+| `POST` | `/api/auth/register` | Cadastrar usuário |
+| `POST` | `/api/auth/login` | Login |
+| `GET` | `/api/cartoes?usuarioId=...` | Consultar cartões |
+| `POST` | `/api/cartoes` | Cadastrar cartão |
+| `POST` | `/api/cartoes/{id}/recarga` | Adicionar créditos |
+| `POST` | `/api/cartoes/pagar` | Debitar saldo por cartão |
+| `GET` | `/api/linhas` | Listar linhas |
+| `GET` | `/api/pontos` | Listar pontos |
+
+## Limitações e próximos passos
+
+O projeto **não deve ser utilizado para cobrança real ou com dados pessoais reais sem reforçar a segurança**. Antes de qualquer publicação para uso real, recomendamos:
+
+- Implementar hash seguro de senhas e autenticação/autorização por sessão ou token; o fluxo atual não possui proteção adequada.
+- Remover credenciais de rede do firmware e de qualquer histórico público, rotacionando credenciais que já tenham sido expostas.
+- Validar certificados HTTPS no ESP32, substituindo o uso de `setInsecure()`.
+- Adicionar validação de entradas, regras de acesso, transações atômicas de débito/recarga e tratamento padronizado de erros.
+- Criar testes automatizados da API e testes ponta a ponta do fluxo RFID → débito → display/motor.
+- Revisar segurança elétrica e níveis de tensão na comunicação entre **Arduino Mega (5 V)** e **ESP32 (3,3 V)**.
+- Validar impressão, tolerâncias, fixação dos componentes e montagem física final.
+- Estudar integração futura de pagamentos reais, notificações de saldo e dados de transporte atualizados.
+
+## Equipe — Four Sync
+
+| Integrante | Responsabilidade |
+| --- | --- |
+| [Vitor Derencio](https://github.com/vtvitor) | Desenvolvimento full-stack |
+| [Leticia S. Meira](https://github.com/leticiameira-star) | Desenvolvimento full-stack |
+| [Maria C. Feitosa](https://github.com/konomi-naruko) | Desenvolvimento front-end |
+| [Kauan Fernandes S.](https://github.com/kauan-cmd-alt) | UI/UX |
 
 ---
 
-## 🔗 Links e Repositórios
-
-- **Front-End:** [github.com/vtvitor/frontend-projeto](https://github.com/vtvitor/frontend-projeto)
-- **Back-End:** [github.com/vtvitor/backend-projeto](https://github.com/vtvitor/backend-projeto)
-- **Landing-page:** https://landing-page-wt6o.onrender.com
-
----
-
-## 🚀 Como Utilizar
-
-1. **Clonagem:** Faça o download dos repositórios do front-end e back-end.
-2. **Banco de dados:** Configure uma instância do MySQL e os parâmetros de conexão no Spring Boot.
-3. **Back-end:** Execute a aplicação Java com Maven, disponibilizando os endpoints da API REST.
-4. **Front-end:** Configure o endereço da API em `api.js` e abra `index.html` no navegador.
-5. **Cadastro:** Crie uma conta ou faça login com suas credenciais.
-6. **Cartões:** Cadastre um cartão, consulte seu saldo e utilize a funcionalidade de recarga.
-7. **Mobilidade:** Consulte linhas, visualize pontos de ônibus e explore os recursos do mapa interativo.
-
----
-
-## 🔮 Possibilidades de Evolução
-
-- Integração de pagamentos reais via Pix e cartões bancários.
-- Monitoramento de ônibus por GPS em tempo real.
-- Notificações automáticas de saldo baixo.
-- Estimativas de chegada dos ônibus aos pontos.
-- Sugestões de trajetos com base na localização do passageiro.
-- Concluir e testar a comunicação entre o ESP32, o leitor RFID-RC522, o display e a API REST.
-- Validar fisicamente a montagem da case 3D e o processo completo de débito de passagem.
-
----
-
-## 📝 Considerações Finais
-
-O **BusPass** representa uma proposta de modernização da experiência dos usuários do transporte público, reunindo tecnologias de desenvolvimento web, integração de APIs REST, persistência de dados e prototipagem eletrônica em uma solução voltada à mobilidade urbana.
-
-Desenvolvido pela equipe **Four Sync**, o projeto demonstra a aplicação prática de conceitos como programação orientada a objetos, arquitetura em camadas, modelagem de banco de dados, comunicação entre sistemas e desenvolvimento de interfaces.
-
-Além de contribuir para o aprendizado técnico dos integrantes, o BusPass apresenta potencial para evoluir como uma plataforma de apoio à mobilidade urbana, tornando o acesso às informações do transporte coletivo mais simples, rápido e organizado.
+<p align="center">Desenvolvido pela equipe <strong>Four Sync</strong> · BusPass</p>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1280" height="820" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+<title id="title">BusPass — Terminal de validação RFID, LCD, ESP32 e Arduino</title>
+<desc id="desc">Ilustração conceitual do terminal BusPass com display, leitor RFID, cartão e componentes de eletrônica.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#082334"/><stop offset=".55" stop-color="#073844"/><stop offset="1" stop-color="#061d2b"/></linearGradient>
+  <linearGradient id="device" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#334552"/><stop offset=".48" stop-color="#182934"/><stop offset="1" stop-color="#0a1520"/></linearGradient>
+  <linearGradient id="lcd" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#13b8f5"/><stop offset=".5" stop-color="#1165e9"/><stop offset="1" stop-color="#182da7"/></linearGradient>
+  <linearGradient id="card" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e0ff6c"/><stop offset=".55" stop-color="#8ff05a"/><stop offset="1" stop-color="#19bb9f"/></linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#123b46" stop-opacity=".93"/><stop offset="1" stop-color="#102933" stop-opacity=".9"/></linearGradient>
+  <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="20"/></filter>
+  <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5"/></filter>
+  <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1" fill="#67e3b8" opacity=".10"/></pattern>
+</defs>
+<rect width="1280" height="820" fill="url(#bg)"/>
+<rect width="1280" height="820" fill="url(#dots)"/>
+<circle cx="648" cy="399" r="375" fill="#02cfad" opacity=".08" filter="url(#shadow)"/>
+<text x="66" y="61" font-family="Arial,Helvetica,sans-serif" font-size="18" letter-spacing="4" font-weight="700" fill="#bdff61">BUSPASS / IOT</text>
+<text x="66" y="105" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="800" fill="#f7fcff">Do software ao transporte real.</text>
+<text x="67" y="134" font-family="Arial,Helvetica,sans-serif" font-size="16" fill="#abd0da">Representação conceitual do terminal de validação de cartões</text>
+<g stroke="#75fa9a" stroke-width="2.5" fill="none" opacity=".78">
+  <path d="M280 270 H330 L382 315"/><path d="M995 264 H948 L902 307"/>
+  <path d="M282 466 H333 L393 376"/><path d="M985 470 H938 L876 439"/>
+</g>
+<g fill="#bcff57"><circle cx="382" cy="315" r="5"/><circle cx="902" cy="307" r="5"/><circle cx="393" cy="376" r="5"/><circle cx="876" cy="439" r="5"/></g>
+<ellipse cx="637" cy="622" rx="365" ry="43" fill="#36ff9d" opacity=".22" filter="url(#shadow)"/>
+<ellipse cx="635" cy="603" rx="348" ry="29" fill="none" stroke="#72f978" stroke-width="4" opacity=".7"/>
+<!-- main device -->
+<path d="M904 211 L935 241 L949 562 L911 587 Z" fill="#080f1a" stroke="#506472" stroke-width="3"/>
+<rect x="335" y="194" width="578" height="391" rx="39" fill="url(#device)" stroke="#677c88" stroke-width="5"/>
+<rect x="351" y="208" width="547" height="360" rx="31" fill="none" stroke="#95aab3" stroke-opacity=".22" stroke-width="2"/>
+<g fill="#1c252d" stroke="#8d9da7" stroke-width="3"><circle cx="373" cy="232" r="12"/><circle cx="875" cy="232" r="12"/><circle cx="373" cy="550" r="12"/><circle cx="875" cy="550" r="12"/></g>
+<g stroke="#b8c6c8" stroke-width="2.2"><path d="M367 232 h12 M373 226 v12 M869 232 h12 M875 226 v12 M367 550 h12 M373 544 v12 M869 550 h12 M875 544 v12"/></g>
+<rect x="395" y="281" width="265" height="137" rx="15" fill="#050d18" stroke="#607988" stroke-width="4"/>
+<rect x="406" y="294" width="242" height="111" rx="6" fill="url(#lcd)"/>
+<rect x="409" y="295" width="234" height="18" fill="#ffffff" opacity=".13"/>
+<g stroke="#e0f9ff" stroke-width="3" fill="none">
+<rect x="433" y="333" width="42" height="27" rx="5"/><path d="M440 364 v9 M467 364 v9 M433 350 h42 M443 373 h6 M460 373 h6"/></g>
+<text x="490" y="359" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="800" fill="#f7ffff">BusPass</text>
+<rect x="702" y="267" width="165" height="213" rx="21" fill="#09171e" stroke="#405664" stroke-width="3"/>
+<g fill="none" stroke="#c9ffdd" stroke-width="5" stroke-linecap="round" opacity=".95">
+<path d="M778 319 q-36 33 0 66 M791 319 q36 33 0 66" />
+<path d="M764 304 q-52 48 0 96 M805 304 q52 48 0 96"/>
+<path d="M747 288 q-69 63 0 127 M821 288 q69 63 0 127"/>
+</g>
+<rect x="777" y="346" width="16" height="28" rx="3" fill="#bfff66" opacity=".95"/>
+<text x="784" y="452" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" fill="#c5e5e2">RFID</text>
+<!-- contactless card -->
+<g transform="translate(500 479) rotate(-11 148 64)">
+<rect x="0" y="0" width="293" height="127" rx="20" fill="#03151b" opacity=".32" transform="translate(12 13)"/>
+<rect x="0" y="0" width="293" height="127" rx="20" fill="url(#card)" stroke="#d2ffff" stroke-width="2.5"/>
+<rect x="22" y="37" width="42" height="30" rx="5" fill="none" stroke="#174e49" stroke-width="5"/>
+<path d="M32 37 v30 M54 37 v30 M22 51 h42" stroke="#174e49" stroke-width="3"/>
+<text x="90" y="59" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="900" letter-spacing="2" fill="#063e41">BUSPASS</text>
+<text x="91" y="86" font-family="Arial,Helvetica,sans-serif" font-size="14" letter-spacing="2" fill="#18595c">TRANSPORTE INTELIGENTE</text>
+<g fill="none" stroke="#0a5d58" stroke-width="4" stroke-linecap="round"><path d="M251 74 q16 14 0 28 M261 66 q25 22 0 44"/></g>
+</g>
+<!-- callout panels -->
+<g font-family="Arial,Helvetica,sans-serif">
+<g><rect x="64" y="197" width="216" height="130" rx="22" fill="url(#panel)" stroke="#4da58d" stroke-width="2"/><path d="M99 232 h46 v49 h-46 z" rx="4" fill="#1a313e" stroke="#c7d7d8" stroke-width="3"/><rect x="106" y="240" width="32" height="32" rx="4" fill="#9daeb9"/><g stroke="#a6eac2" stroke-width="3"><path d="M99 239 h-12 M99 253 h-12 M99 267 h-12 M145 239 h12 M145 253 h12 M145 267 h12"/></g><text x="173" y="253" font-size="24" font-weight="700" fill="white">ESP32</text><text x="173" y="277" font-size="13" fill="#9fc9ce">Leitura e rede</text></g>
+<g><rect x="995" y="194" width="221" height="138" rx="22" fill="url(#panel)" stroke="#4da58d" stroke-width="2"/><rect x="1025" y="229" width="51" height="57" rx="8" fill="#126bad" stroke="#b4d4df" stroke-width="3"/><rect x="1037" y="240" width="27" height="34" rx="4" fill="#0a3959"/><g stroke="#95c8db" stroke-width="3"><path d="M1026 236 h-9 M1026 247 h-9 M1026 258 h-9 M1026 269 h-9 M1076 236 h8 M1076 247 h8 M1076 258 h8 M1076 269 h8"/></g><text x="1090" y="252" font-size="23" font-weight="700" fill="white">Arduino</text><text x="1090" y="275" font-size="13" fill="#9fc9ce">Display e motor</text></g>
+<g><rect x="60" y="413" width="222" height="114" rx="21" fill="url(#panel)" stroke="#4da58d" stroke-width="2"/><rect x="82" y="441" width="71" height="46" rx="4" fill="#116c3e" stroke="#bddcb7" stroke-width="3"/><rect x="87" y="447" width="61" height="33" fill="#0f5bd2"/><text x="165" y="462" font-size="23" font-weight="700" fill="white">LCD / TFT</text><text x="165" y="483" font-size="13" fill="#9fc9ce">Feedback visual</text></g>
+<g><rect x="985" y="413" width="231" height="119" rx="22" fill="url(#panel)" stroke="#4da58d" stroke-width="2"/><rect x="1006" y="437" width="67" height="69" rx="6" fill="#115bc8" stroke="#78baff" stroke-width="2"/><g fill="none" stroke="#d6f1ff" stroke-width="2.5"><path d="M1024 462 q-13 11 0 22 M1054 462 q13 11 0 22 M1032 457 q-18 16 0 32 M1046 457 q18 16 0 32"/></g><text x="1083" y="462" font-size="21" font-weight="700" fill="white">RC522</text><text x="1083" y="486" font-size="13" fill="#9fc9ce">Leitor RFID</text></g>
+</g>
+<!-- pipeline -->
+<text x="66" y="682" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#e5f9fc" letter-spacing="2">FLUXO PROPOSTO</text>
+<g font-family="Arial,Helvetica,sans-serif" text-anchor="middle" font-weight="700" font-size="19">
+<rect x="68" y="707" width="192" height="67" rx="16" fill="#113341" stroke="#4b9f8b" stroke-width="2"/><text x="164" y="748" fill="#dcf9f3">RFID-RC522</text>
+<rect x="310" y="707" width="170" height="67" rx="16" fill="#113341" stroke="#4b9f8b" stroke-width="2"/><text x="395" y="748" fill="#dcf9f3">ESP32</text>
+<rect x="529" y="707" width="205" height="67" rx="16" fill="#113341" stroke="#4b9f8b" stroke-width="2"/><text x="631" y="748" fill="#dcf9f3">Arduino Mega</text>
+<rect x="783" y="707" width="176" height="67" rx="16" fill="#113341" stroke="#4b9f8b" stroke-width="2"/><text x="871" y="748" fill="#dcf9f3">API REST</text>
+<rect x="1008" y="707" width="204" height="67" rx="16" fill="#113341" stroke="#4b9f8b" stroke-width="2"/><text x="1110" y="748" fill="#dcf9f3">MySQL</text>
+</g>
+<g fill="none" stroke="#a6f88e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M275 740 h23 m-7 -6 7 6 -7 6 M494 740 h23 m-7 -6 7 6 -7 6 M748 740 h23 m-7 -6 7 6 -7 6 M973 740 h23 m-7 -6 7 6 -7 6"/></g>
+<text x="1212" y="798" font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="end" fill="#8dadb3">Ilustração conceitual · não representa montagem homologada</text>
+</svg>
